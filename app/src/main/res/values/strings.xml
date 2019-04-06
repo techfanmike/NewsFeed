@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">News Feed</string>
     <string name="guardian_key">613d1d2f-dd56-4d5e-8404-519ba4b18e24</string>
+    <string name="http_string">http</string>
 </resources>
