@@ -20,7 +20,7 @@ public class ArticleLoader extends AsyncTaskLoader<List<ArticleData>> {
     @Override
     public List<ArticleData> loadInBackground() {
 
-        try {
+        //try {
         List<ArticleData> articleList = null;
         Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme(getContext().getString(R.string.http_string))
