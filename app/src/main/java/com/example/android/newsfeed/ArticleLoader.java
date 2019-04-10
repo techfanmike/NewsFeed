@@ -93,12 +93,14 @@ public class ArticleLoader extends AsyncTaskLoader<List<ArticleData>> {
                             author += item.getString("webTitle");
                         }
                     }
+
+                    articleList.add(new ArticleData(webTitle, author, date));
                 }
 
             } catch(JSONException e) {
                 ;
             }
 
-        return null;
+        return articleList;
     }
 }
