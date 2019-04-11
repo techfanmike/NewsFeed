@@ -70,10 +70,12 @@ public final class QueryUtils {
             if(urlConnection.getResponseCode()  == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
+            } else {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
 
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            Log.e(LOG_TAG, "problem retrieving the earthquake JSON results.", e);
         } finally {
             if(urlConnection != null) {
                 urlConnection.disconnect();
@@ -89,7 +91,8 @@ public final class QueryUtils {
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
             while (line != null) {
@@ -113,6 +116,9 @@ public final class QueryUtils {
 
             for (int index1 = 0; index1 < articleArray.length(); index1++) {
                 JSONObject currentArticle = articleArray.getJSONObject(index1);
+
+
+
             }
 
         } catch (JSONException e) {
