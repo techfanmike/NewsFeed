@@ -8,13 +8,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ArticleListAdapter extends ArrayAdapter<ArticleData> {
-    public ArticleListAdapter(Context context, int resource, ArrayList<ArticleData> articleList) {
-        super(context, resource, articleList);
+    public ArticleListAdapter(Context context, List<ArticleData> articleList) {
+        super(context, 0, articleList);
     }
 
     // implement class for view holder pattern

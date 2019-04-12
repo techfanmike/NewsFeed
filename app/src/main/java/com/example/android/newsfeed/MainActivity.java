@@ -19,6 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements LoaderCallbacks<List<ArticleData>> {
 
+    private static final int ARTICLE_LOADER_ID = 1;
     private ArticleListAdapter articleListAdapter;
 
     @Override
@@ -26,28 +27,30 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: complete layout
-        articleListAdapter = new ArticleListAdapter(this, 5, new ArrayList<ArticleData>());
-
-        // TODO: complete layout
-        ListView articleList = findViewById(5);
+        // create adapter and bind to article list view
+        articleListAdapter = new ArticleListAdapter(this, new ArrayList<ArticleData>());
+        ListView articleList = findViewById(R.id.list_view_articles);
         articleList.setAdapter(articleListAdapter);
 
+        // get the network connection information
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
-
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-
+        // decide if we have a network connection to continue
         if(networkInfo != null && networkInfo.isConnected()) {
+
+            // get the loader manager and kick off the loader
             LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
         }
     }
-
 
     @NonNull
     @Override
     public Loader<List<ArticleData>> onCreateLoader(int i, @Nullable Bundle bundle) {
+
+        // build the query and pass to the article loader
         Uri baseUri = Uri.parse("https://content.guardianapis.com/search");
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendQueryParameter("section", "news");
