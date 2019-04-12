@@ -112,15 +112,13 @@ public final class QueryUtils {
         try {
 
             JSONObject baseJsonResponse = new JSONObject(articleJson);
-            JSONArray articleArray = baseJsonResponse.getJSONObject("features").getJSONArray("results");
+            JSONArray articleArray = baseJsonResponse.getJSONObject("response").getJSONArray("results");
 
             for (int index1 = 0; index1 < articleArray.length(); index1++) {
                 JSONObject currentArticle = articleArray.getJSONObject(index1);
-                String sectionName = currentArticle.getString("sectionName");
                 String webTitle = currentArticle.getString("webTitle");
-                String webDate = currentArticle.getString("webPublicationDate");
-                String webUrl = currentArticle.getString("webUrl");
                 String date = currentArticle.getString("webPublicationDate");
+                String url = currentArticle.getString("webUrl");
 
                 String authorName = " ";
 
@@ -135,7 +133,7 @@ public final class QueryUtils {
                     Log.e(LOG_TAG, "No author Name");
                 }
 
-                articles.add(new ArticleData(webTitle, authorName, date));
+                articles.add(new ArticleData(webTitle, authorName, date, url));
             }
 
         } catch (JSONException e) {

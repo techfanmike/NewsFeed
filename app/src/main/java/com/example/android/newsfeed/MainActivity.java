@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<ArticleData>> loader, List<ArticleData> articleData) {
-        ;
+        articleListAdapter.addAll(articleData);
     }
 
     @Override
