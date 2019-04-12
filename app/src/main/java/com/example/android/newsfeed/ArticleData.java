@@ -28,5 +28,4 @@ public class ArticleData {
     public String getUrl() {
         return mUrl;
     }
-
 }

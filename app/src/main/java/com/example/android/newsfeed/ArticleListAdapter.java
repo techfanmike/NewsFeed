@@ -62,7 +62,7 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleData> {
         ArticleData entry = getItem(position);
 
         holder.mTitle.setText(entry.getTitle());
-        holder.mAuthor.setText(entry.getTitle());
+        holder.mAuthor.setText(entry.getAuthor());
         holder.mDate.setText(entry.getDate());
 
         return convertView;

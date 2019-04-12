@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity
         uriBuilder.appendQueryParameter("section", "news");
         uriBuilder.appendQueryParameter("page_size", "150");
         uriBuilder.appendQueryParameter("show_tags", "contributor");
-        uriBuilder.appendQueryParameter("from_date", "2019-03-01");
-        uriBuilder.appendQueryParameter("to-date", "2019-04-01");
+        uriBuilder.appendQueryParameter("from_date", "2019-03-23");
+        uriBuilder.appendQueryParameter("to-date", "2019-04-23");
         uriBuilder.appendQueryParameter("api-key", getString(R.string.guardian_key));
 
         return new ArticleLoader(this, uriBuilder.toString());
