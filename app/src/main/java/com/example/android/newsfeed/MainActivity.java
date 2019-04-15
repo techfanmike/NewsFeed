@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity
     public Loader<List<ArticleData>> onCreateLoader(int i, @Nullable Bundle bundle) {
 
         // build the query and pass to the article loader
-        Uri baseUri = Uri.parse("https://content.guardianapis.com/search");
+        Uri baseUri = Uri.parse(getString(R.string.base_uri));
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter("order-by", "newest");
-        uriBuilder.appendQueryParameter("page-size", "20");
-        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter(getString(R.string.order), getString(R.string.newest));
+        uriBuilder.appendQueryParameter(getString(R.string.page_size), getString(R.string.page_size_num));
+        uriBuilder.appendQueryParameter(getString(R.string.show_tags), getString(R.string.contributor));
 
-        uriBuilder.appendQueryParameter("api-key", getString(R.string.guardian_key));
+        uriBuilder.appendQueryParameter(getString(R.string.api_key), getString(R.string.guardian_key));
 
         // kick off the async loader
         return new ArticleLoader(this, uriBuilder.toString());

@@ -4,5 +4,13 @@
     <string name="http_string">http</string>
     <string name="no_internet_connection">No internet connection.</string>
     <string name="no_articles">No articles found.</string>
+    <string name="base_uri">https://content.guardianapis.com/search</string>
+    <string name="order">order-by</string>
+    <string name="newest">newest</string>
+    <string name="page_size">page-size</string>
+    <string name="page_size_num">20</string>
+    <string name="show_tags">show-tags</string>
+    <string name="contributor">contributor</string>
+    <string name="api_key">api-key</string>
 
 </resources>
