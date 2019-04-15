@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.list_view_articles)
     ListView articleList;
+    @BindView(R.id.loading_indicator)
+    View loadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<ArticleData>> loader, List<ArticleData> articleData) {
-        articleListAdapter.addAll(articleData);
+        loadingIndicator.setVisibility(View.GONE);
+
+        // make sure we have a valid list of articles before adding to the adapter
+        if (articleData != null && !articleData.isEmpty()) {
+            articleListAdapter.addAll(articleData);
+        }
     }
 
     @Override
