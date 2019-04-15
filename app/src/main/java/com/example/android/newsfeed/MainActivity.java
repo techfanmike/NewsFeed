@@ -3,6 +3,7 @@ package com.example.android.newsfeed;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -51,6 +54,18 @@ public class MainActivity extends AppCompatActivity
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
         }
+
+        articleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                ArticleData currentItem = articleListAdapter.getItem(position);
+                Uri articleUri = Uri.parse(currentItem.getUrl());
+
+                // create an intent to launch web browser, and send the intent
+                Intent webSiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
+                startActivity(webSiteIntent);
+            }
+        });
     }
 
     @NonNull
