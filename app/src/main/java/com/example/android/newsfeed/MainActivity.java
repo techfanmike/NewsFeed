@@ -89,9 +89,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<ArticleData>> loader, List<ArticleData> articleData) {
+
+        // done loading, so hide the spinny progress thingy
         loadingIndicator.setVisibility(View.GONE);
 
-        // make sure we have a valid list of articles before adding to the adapter
+        // make sure we have a valid list of articles before adding to the adapter to display
         if (articleData != null && !articleData.isEmpty()) {
             articleListAdapter.addAll(articleData);
         }
