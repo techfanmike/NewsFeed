@@ -61,10 +61,12 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleData> {
         // get a handle to the item in the array indexed by position
         ArticleData entry = getItem(position);
 
+        // assign the data values
         holder.mTitle.setText(entry.getTitle());
         holder.mAuthor.setText(entry.getAuthor());
         holder.mDate.setText(entry.getDate());
 
+        // return the constructed view
         return convertView;
     }
 }

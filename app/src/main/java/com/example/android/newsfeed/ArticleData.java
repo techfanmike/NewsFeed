@@ -1,11 +1,13 @@
 package com.example.android.newsfeed;
 
+// A class to hold the article data
 public class ArticleData {
-    String mTitle;
-    String mAuthor;
-    String mDate;
-    String mUrl;
+    private String mTitle;
+    private String mAuthor;
+    private String mDate;
+    private String mUrl;
 
+    // constructor to make a new article data object
     public ArticleData(String title, String author, String date, String url) {
         mTitle = title;
         mAuthor = author;

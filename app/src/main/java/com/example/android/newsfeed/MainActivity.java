@@ -16,20 +16,27 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity
         implements LoaderCallbacks<List<ArticleData>> {
 
     private static final int ARTICLE_LOADER_ID = 1;
     private ArticleListAdapter articleListAdapter;
 
+    @BindView(R.id.list_view_articles)
+    ListView articleList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
         // create adapter and bind to article list view
         articleListAdapter = new ArticleListAdapter(this, new ArrayList<ArticleData>());
-        ListView articleList = findViewById(R.id.list_view_articles);
         articleList.setAdapter(articleListAdapter);
 
         // get the network connection information
@@ -53,13 +60,13 @@ public class MainActivity extends AppCompatActivity
         // build the query and pass to the article loader
         Uri baseUri = Uri.parse("https://content.guardianapis.com/search");
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter("section", "news");
-        uriBuilder.appendQueryParameter("page_size", "150");
-        uriBuilder.appendQueryParameter("show_tags", "contributor");
-        uriBuilder.appendQueryParameter("from_date", "2019-03-23");
-        uriBuilder.appendQueryParameter("to-date", "2019-04-23");
+        uriBuilder.appendQueryParameter("order-by", "newest");
+        uriBuilder.appendQueryParameter("page-size", "20");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+
         uriBuilder.appendQueryParameter("api-key", getString(R.string.guardian_key));
 
+        // kick off the async loader
         return new ArticleLoader(this, uriBuilder.toString());
     }
 

@@ -20,6 +20,7 @@ import java.util.List;
 
 public final class QueryUtils {
 
+    // string for loggin purposes
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
     // private constructor, should not be called
@@ -27,8 +28,10 @@ public final class QueryUtils {
 
     public static List<ArticleData> fetchArticleData(String requestUrl) {
 
+        // query is passed in
         URL url = createUrl(requestUrl);
 
+        // make the request
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
@@ -40,7 +43,7 @@ public final class QueryUtils {
         return extractFeatureFromJson(jsonResponse);
     }
 
-    // return a URL object from a string
+    // helper to return a URL object from a string
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -52,6 +55,7 @@ public final class QueryUtils {
         return url;
     }
 
+    // open the http connection, use input stream to read
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
@@ -88,6 +92,7 @@ public final class QueryUtils {
         return jsonResponse;
     }
 
+    // given an input stream, read in a line
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -103,6 +108,7 @@ public final class QueryUtils {
         return output.toString();
     }
 
+    // interpret the JSON response, return a list of article data
     private static List<ArticleData> extractFeatureFromJson(String articleJson) {
 
         if(TextUtils.isEmpty(articleJson)) { return null;}
@@ -120,24 +126,24 @@ public final class QueryUtils {
                 String date = currentArticle.getString("webPublicationDate");
                 String url = currentArticle.getString("webUrl");
 
-                String authorName = " ";
+                String authorName = "";
 
                 try {
                     JSONArray tags = currentArticle.getJSONArray("tags");
                     for(int index2 = 0; index2 < tags.length(); index2++) {
                         JSONObject authorNameObj = tags.getJSONObject(index2);
                         authorName = authorNameObj.getString("webTitle");
-
                     }
                 } catch (Exception e) {
                     Log.e(LOG_TAG, "No author Name");
                 }
 
+                if(authorName.equals(""))authorName = "No author given";
                 articles.add(new ArticleData(webTitle, authorName, date, url));
             }
 
         } catch (JSONException e) {
-            Log.e("QueryUtils", "Problem paring the article JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the article JSON results", e);
         }
 
         return articles;
