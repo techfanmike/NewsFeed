@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity
     ListView articleList;
     @BindView(R.id.loading_indicator)
     View loadingIndicator;
+    @BindView(R.id.empty_view)
+    TextView mEmptyStateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        // put something in the list when empty
+        articleList.setEmptyView(mEmptyStateTextView);
 
         // create adapter and bind to article list view
         articleListAdapter = new ArticleListAdapter(this, new ArrayList<ArticleData>());
@@ -55,6 +61,9 @@ public class MainActivity extends AppCompatActivity
             // get the loader manager and kick off the loader
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
+        } else {
+            loadingIndicator.setVisibility(View.GONE);
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
         articleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,6 +101,9 @@ public class MainActivity extends AppCompatActivity
 
         // done loading, so hide the spinny progress thingy
         loadingIndicator.setVisibility(View.GONE);
+
+        // tell the user no articles have been found
+        mEmptyStateTextView.setText(R.string.no_articles);
 
         // make sure we have a valid list of articles before adding to the adapter to display
         if (articleData != null && !articleData.isEmpty()) {
