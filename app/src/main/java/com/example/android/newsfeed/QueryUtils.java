@@ -18,7 +18,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class QueryUtils {
+final class QueryUtils {
 
     // string for loggin purposes
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
@@ -26,7 +26,7 @@ public final class QueryUtils {
     // private constructor, should not be called
     private QueryUtils() {;}
 
-    public static List<ArticleData> fetchArticleData(String requestUrl) {
+    static List<ArticleData> fetchArticleData(String requestUrl) {
 
         // query is passed in
         URL url = createUrl(requestUrl);
