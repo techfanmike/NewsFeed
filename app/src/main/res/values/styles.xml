@@ -15,6 +15,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginStart">16dp</item>
+        <item name="android:paddingRight">16dp</item>
     </style>
 
     <style name="AuthorStyle" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -23,6 +24,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginStart">16dp</item>
+        <item name="android:paddingRight">16dp</item>
     </style>
 
     <style name="DateStyle" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -31,6 +33,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginStart">16dp</item>
+        <item name="android:paddingRight">16dp</item>
     </style>
 
 </resources>
