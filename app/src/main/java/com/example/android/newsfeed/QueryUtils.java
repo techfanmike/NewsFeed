@@ -65,12 +65,14 @@ final class QueryUtils {
         InputStream inputStream = null;
 
         try {
+            // define a connection, set parameters, and connect
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
+            // check if we received the '200' okay
             if(urlConnection.getResponseCode()  == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
@@ -95,7 +97,10 @@ final class QueryUtils {
     // given an input stream, read in a line
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
+
+        // check for nullness
         if (inputStream != null) {
+            // hook up the input stream and the reader.  Read while we have lines
             InputStreamReader inputStreamReader =
                     new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
@@ -111,15 +116,18 @@ final class QueryUtils {
     // interpret the JSON response, return a list of article data
     private static List<ArticleData> extractFeatureFromJson(String articleJson) {
 
+        // quick return if json string proves null
         if(TextUtils.isEmpty(articleJson)) { return null;}
 
+        // declare the list of articles we shall return
         List<ArticleData> articles = new ArrayList<>();
 
         try {
-
+            // create the necessary json objects
             JSONObject baseJsonResponse = new JSONObject(articleJson);
             JSONArray articleArray = baseJsonResponse.getJSONObject("response").getJSONArray("results");
 
+            //  go through the array and get the article information
             for (int index1 = 0; index1 < articleArray.length(); index1++) {
                 JSONObject currentArticle = articleArray.getJSONObject(index1);
                 String webTitle = currentArticle.getString("webTitle");
@@ -130,6 +138,7 @@ final class QueryUtils {
 
                 try {
                     JSONArray tags = currentArticle.getJSONArray("tags");
+                    // author name is in the tags, so iterate through and find
                     for(int index2 = 0; index2 < tags.length(); index2++) {
                         JSONObject authorNameObj = tags.getJSONObject(index2);
                         authorName = authorNameObj.getString("webTitle");
@@ -138,6 +147,7 @@ final class QueryUtils {
                     Log.e(LOG_TAG, "No author Name");
                 }
 
+                // if no author, put something in the text field
                 if(authorName.equals(""))authorName = "No author given";
                 articles.add(new ArticleData(webTitle, authorName, date, url));
             }
@@ -146,6 +156,7 @@ final class QueryUtils {
             Log.e("QueryUtils", "Problem parsing the article JSON results", e);
         }
 
+        // return the list of articles
         return articles;
     }
 }
