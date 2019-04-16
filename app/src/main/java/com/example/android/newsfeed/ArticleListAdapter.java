@@ -22,6 +22,7 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleData> {
     static private class ViewHolder {
         private TextView mTitle;
         private TextView mAuthor;
+        private TextView mSection;
         private TextView mDate;
     }
 
@@ -30,6 +31,8 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleData> {
     TextView articleName;
     @BindView(R.id.AuthorName)
     TextView authorName;
+    @BindView(R.id.section)
+    TextView section;
     @BindView(R.id.Date)
     TextView dateName;
 
@@ -51,6 +54,7 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleData> {
             holder = new ViewHolder();
             holder.mTitle = articleName;
             holder.mAuthor = authorName;
+            holder.mSection = section;
             holder.mDate = dateName;
             convertView.setTag(holder);
         } else {
@@ -64,6 +68,7 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleData> {
         // assign the data values
         holder.mTitle.setText(entry.getTitle());
         holder.mAuthor.setText(entry.getAuthor());
+        holder.mSection.setText(entry.getSection());
         holder.mDate.setText(entry.getDate());
 
         // return the constructed view

@@ -13,6 +13,10 @@
         style="@style/AuthorStyle"/>
 
     <TextView
+        android:id="@+id/section"
+        style="@style/sectionStyle"/>
+
+    <TextView
         android:id="@+id/Date"
         style="@style/DateStyle"/>
 

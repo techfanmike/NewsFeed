@@ -20,8 +20,13 @@ import java.util.List;
 
 final class QueryUtils {
 
-    // string for loggin purposes
+    // define some strings
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
+    private static final String WEB_URL = "webUrl";
+    private static final String PUB_DATE = "webPublicationDate";
+    private static final String SECTION = "sectionId";
+    private static final String WEB_TITLE = "webTitle";
+    private static final String TAGS = "tags";
 
     // private constructor, should not be called
     private QueryUtils() {;}
@@ -130,18 +135,19 @@ final class QueryUtils {
             //  go through the array and get the article information
             for (int index1 = 0; index1 < articleArray.length(); index1++) {
                 JSONObject currentArticle = articleArray.getJSONObject(index1);
-                String webTitle = currentArticle.getString("webTitle");
-                String date = currentArticle.getString("webPublicationDate");
-                String url = currentArticle.getString("webUrl");
+                String webTitle = currentArticle.getString(WEB_TITLE);
+                String section = currentArticle.getString(SECTION);
+                String date = currentArticle.getString(PUB_DATE);
+                String url = currentArticle.getString(WEB_URL);
 
                 String authorName = "";
 
                 try {
-                    JSONArray tags = currentArticle.getJSONArray("tags");
+                    JSONArray tags = currentArticle.getJSONArray(TAGS);
                     // author name is in the tags, so iterate through and find
                     for(int index2 = 0; index2 < tags.length(); index2++) {
                         JSONObject authorNameObj = tags.getJSONObject(index2);
-                        authorName = authorNameObj.getString("webTitle");
+                        authorName = authorNameObj.getString(WEB_TITLE);
                     }
                 } catch (Exception e) {
                     Log.e(LOG_TAG, "No author Name");
@@ -149,7 +155,7 @@ final class QueryUtils {
 
                 // if no author, put something in the text field
                 if(authorName.equals(""))authorName = "No author given";
-                articles.add(new ArticleData(webTitle, authorName, date, url));
+                articles.add(new ArticleData(webTitle, authorName, section, date, url));
             }
 
         } catch (JSONException e) {

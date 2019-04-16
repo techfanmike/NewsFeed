@@ -4,13 +4,15 @@ package com.example.android.newsfeed;
 public class ArticleData {
     private String mTitle;
     private String mAuthor;
+    private String mSection;
     private String mDate;
     private String mUrl;
 
     // constructor to make a new article data object
-    public ArticleData(String title, String author, String date, String url) {
+    public ArticleData(String title, String author, String section, String date, String url) {
         mTitle = title;
         mAuthor = author;
+        mSection = section;
         mDate = date;
         mUrl = url;
     }
@@ -25,6 +27,10 @@ public class ArticleData {
 
     public String getDate() {
         return mDate;
+    }
+
+    public String getSection() {
+        return mSection;
     }
 
     public String getUrl() {

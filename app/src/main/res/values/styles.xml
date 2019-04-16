@@ -18,11 +18,21 @@
         <item name="android:paddingRight">@dimen/textview_padding</item>
     </style>
 
+    <style name="sectionStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/regular_text</item>
+        <item name="android:layout_marginTop">@dimen/top_padding</item>
+        <item name="android:layout_marginStart">@dimen/textview_padding</item>
+        <item name="android:paddingRight">@dimen/textview_padding</item>
+    </style>
+
     <style name="AuthorStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/regular_text</item>
         <item name="android:layout_marginTop">@dimen/top_padding</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:layout_marginStart">@dimen/textview_padding</item>
         <item name="android:paddingRight">@dimen/textview_padding</item>
     </style>
